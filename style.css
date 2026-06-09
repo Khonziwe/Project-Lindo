@@ -11,7 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
     background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
 }
 
@@ -22,19 +21,16 @@ body {
     text-align: center;
 
     background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(12px);
     border-radius: 24px;
-
-    transition: all 1s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(12px);
 
     color: black;
 }
 
 h1 {
     letter-spacing: 4px;
-    margin-bottom: 15px;
-    color: black;
+    margin-bottom: 20px;
 }
 
 .briefing {
@@ -45,25 +41,18 @@ h1 {
     color: #111;
 }
 
-.classified {
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
 label {
     display: block;
     margin-bottom: 10px;
-    color: black;
 }
 
 input {
     width: 100%;
     padding: 12px;
-    border: none;
     border-radius: 12px;
-    font-size: 16px;
+    border: none;
     background: #f1f5f9;
+    font-size: 16px;
 }
 
 button {
@@ -71,39 +60,32 @@ button {
     padding: 12px 24px;
     border: none;
     border-radius: 12px;
-    cursor: pointer;
-
     background: #2563eb;
     color: white;
     font-weight: bold;
-    font-size: 16px;
-
-    transition: 0.2s ease;
+    cursor: pointer;
 }
 
 button:hover {
     transform: scale(1.05);
-    background: #1d4ed8;
 }
 
 #status {
     margin-top: 25px;
     font-size: 18px;
-    line-height: 1.6;
     min-height: 80px;
-    color: black !important;
 }
 
 .birthday-message {
-    color: black !important;
     font-weight: bold;
+    color: black;
 }
 
 .loading {
     color: #b45309;
 }
 
-/* Balloons */
+/* balloons */
 .balloon {
     position: absolute;
     bottom: -150px;
