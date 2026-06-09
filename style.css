@@ -16,9 +16,9 @@ body {
 }
 
 .container {
-    width: 450px;
-    max-width: 90%;
-    padding: 40px;
+    width: 520px;
+    max-width: 92%;
+    padding: 35px;
     text-align: center;
 
     background: rgba(255, 255, 255, 0.92);
@@ -31,22 +31,24 @@ body {
     color: black;
 }
 
-.celebration {
-    background: rgba(255, 215, 0, 0.22);
-    border: 1px solid gold;
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-    transform: scale(1.02);
-}
-
 h1 {
     letter-spacing: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: black;
 }
 
-.subtitle {
-    color: #333;
-    margin-bottom: 25px;
+.briefing {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.classified {
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 
 label {
@@ -61,7 +63,6 @@ input {
     border: none;
     border-radius: 12px;
     font-size: 16px;
-    color: black;
     background: #f1f5f9;
 }
 
@@ -123,10 +124,6 @@ button:hover {
 }
 
 @keyframes floatUp {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-130vh);
-    }
+    from { transform: translateY(0); }
+    to { transform: translateY(-130vh); }
 }
