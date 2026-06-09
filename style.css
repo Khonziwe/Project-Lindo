@@ -13,8 +13,6 @@ body {
     overflow: hidden;
 
     background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-
-    color: black; /* ✅ FIX: all text now black */
 }
 
 .container {
@@ -23,15 +21,14 @@ body {
     padding: 40px;
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.85); /* lighter so black text is visible */
+    background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.3);
-
     backdrop-filter: blur(12px);
     border-radius: 24px;
 
     transition: all 1s ease;
 
-    color: black; /* ensure container text stays black */
+    color: black;
 }
 
 .celebration {
@@ -87,9 +84,23 @@ button:hover {
     font-size: 20px;
     line-height: 1.6;
     min-height: 80px;
-    color: black;
+
+    color: black !important;
 }
 
+#status * {
+    color: black !important;
+}
+
+.birthday-message {
+    color: black !important;
+}
+
+.loading {
+    color: #b45309;
+}
+
+/* Balloons */
 .balloon {
     position: absolute;
     bottom: -150px;
@@ -116,8 +127,4 @@ button:hover {
     to {
         transform: translateY(-130vh);
     }
-}
-
-.loading {
-    color: #b45309;
 }
