@@ -21,7 +21,7 @@ body {
     padding: 40px;
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(12px);
     border-radius: 24px;
@@ -32,9 +32,10 @@ body {
 }
 
 .celebration {
-    background: rgba(255, 215, 0, 0.25);
+    background: rgba(255, 215, 0, 0.22);
     border: 1px solid gold;
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+    transform: scale(1.02);
 }
 
 h1 {
@@ -61,9 +62,11 @@ input {
     border-radius: 12px;
     font-size: 16px;
     color: black;
+    background: #f1f5f9;
 }
 
 button {
+    margin-top: 15px;
     padding: 12px 24px;
     border: none;
     border-radius: 12px;
@@ -73,27 +76,26 @@ button {
     color: white;
     font-weight: bold;
     font-size: 16px;
+
+    transition: 0.2s ease;
 }
 
 button:hover {
     transform: scale(1.05);
+    background: #1d4ed8;
 }
 
 #status {
     margin-top: 25px;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6;
     min-height: 80px;
-
-    color: black !important;
-}
-
-#status * {
     color: black !important;
 }
 
 .birthday-message {
     color: black !important;
+    font-weight: bold;
 }
 
 .loading {
