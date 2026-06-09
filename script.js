@@ -11,6 +11,13 @@ async function checkDate() {
     const status = document.getElementById("status");
     const card = document.getElementById("mainCard");
     const music = document.getElementById("birthdayMusic");
+    const balloonContainer = document.getElementById("balloon-container");
+
+    // RESET UI EVERY TIME (fixes your "first try bug")
+    card.classList.remove("celebration");
+    balloonContainer.innerHTML = "";
+    music.pause();
+    music.currentTime = 0;
 
     if (!input) {
         status.innerHTML = "Please select a date.";
@@ -19,43 +26,49 @@ async function checkDate() {
 
     const selectedDate = new Date(input);
 
+    // 🚨 BLOCK PAST DATES (before today)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        status.innerHTML = "You cannot enter a past date.";
+        return;
+    }
+
     const day = selectedDate.getDate();
     const month = selectedDate.getMonth();
 
     const birthdayDay = 9;
     const birthdayMonth = 5; // June (0-indexed)
 
-    if (day === birthdayDay && month === birthdayMonth) {
+    const isBirthday = (day === birthdayDay && month === birthdayMonth);
+
+    if (isBirthday) {
 
         status.innerHTML = "<div class='loading'>Date Verified...</div>";
-        await delay(1200);
+        await delay(800);
 
         status.innerHTML = "<div class='loading'>Loading Project Lindo...</div>";
-        await delay(1200);
+        await delay(800);
 
         status.innerHTML = "<div class='loading'>Preparing Message...</div>";
-        await delay(1500);
+        await delay(1200);
 
         launchConfetti();
         createBalloons();
 
         card.classList.add("celebration");
 
-        music.currentTime = 0;
-
         try {
             await music.play();
-        } catch (error) {
-            console.log("Audio play blocked:", error);
+        } catch (e) {
+            console.log("Audio blocked:", e);
         }
 
-        status.innerHTML =
-            "🎉<br><br>" + decodeMessage();
+        status.innerHTML = "🎉<br><br>" + decodeMessage();
 
     } else {
-
-        music.pause();
-        music.currentTime = 0;
 
         const currentYearBirthday =
             new Date(selectedDate.getFullYear(), birthdayMonth, birthdayDay);
@@ -68,11 +81,12 @@ async function checkDate() {
         }
 
         const diff = nextBirthday - selectedDate;
-
         const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
         status.innerHTML =
-            "Hang in there. There are " + daysRemaining + " day(s) until your next birthday.";
+            "Hang in there. There are " +
+            daysRemaining +
+            " day(s until the next birthday.";
     }
 }
 
@@ -82,22 +96,13 @@ function delay(ms) {
 
 function launchConfetti() {
 
-    const duration = 6000;
+    const duration = 5000;
     const end = Date.now() + duration;
 
     (function frame() {
 
-        confetti({
-            particleCount: 5,
-            spread: 90,
-            origin: { x: 0 }
-        });
-
-        confetti({
-            particleCount: 5,
-            spread: 90,
-            origin: { x: 1 }
-        });
+        confetti({ particleCount: 5, spread: 90, origin: { x: 0 } });
+        confetti({ particleCount: 5, spread: 90, origin: { x: 1 } });
 
         if (Date.now() < end) {
             requestAnimationFrame(frame);
@@ -110,13 +115,7 @@ function createBalloons() {
 
     const container = document.getElementById("balloon-container");
 
-    const colors = [
-        "#ff4d6d",
-        "#ffd60a",
-        "#4cc9f0",
-        "#80ed99",
-        "#c77dff"
-    ];
+    const colors = ["#ff4d6d", "#ffd60a", "#4cc9f0", "#80ed99", "#c77dff"];
 
     for (let i = 0; i < 25; i++) {
 
