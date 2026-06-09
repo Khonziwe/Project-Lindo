@@ -95,7 +95,6 @@ if(day === birthdayDay && month === birthdayMonth){
     status.innerHTML =
     `Hang in there. There are ${daysRemaining} day(s) until the next birthday.`;
 }
-```
 
 }
 
