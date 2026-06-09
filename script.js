@@ -1,13 +1,13 @@
 const encodedMessage =
-"SGFwcHkgYmlydGhkYXkgTGluZG8uIEkgaG9wZSB5b3UgYXJlIGhhdmluZyBhIGJsYXN0IG9mIGEgZGF5LiBHb2QgYmxlc3Mu";
+"SGFwcHkgYmlydGhkYXkgTGluZG8uIFlvdXIgIG1pc3Npb24gdG9kYXkgaXMgdG8gaGF2ZSBhIGJsYXN0LiBHb2RzcGVlZCE=";
 
 function decodeMessage() {
     return atob(encodedMessage);
 }
 
-// Birthday config (Lindo's birthday)
+// Birthday config
 const BIRTHDAY_DAY = 9;
-const BIRTHDAY_MONTH = 5; // June (0-indexed)
+const BIRTHDAY_MONTH = 5; // June
 
 async function checkDate() {
 
@@ -17,14 +17,14 @@ async function checkDate() {
     const music = document.getElementById("birthdayMusic");
     const balloonContainer = document.getElementById("balloon-container");
 
-    // RESET SYSTEM STATE
+    // reset system
     card.classList.remove("celebration");
     balloonContainer.innerHTML = "";
     music.pause();
     music.currentTime = 0;
 
     if (!input) {
-        status.innerHTML = "SYSTEM ERROR: No input detected.";
+        status.innerHTML = "SYSTEM ERROR: No access code entered.";
         return;
     }
 
@@ -36,16 +36,16 @@ async function checkDate() {
 
     const isBirthday = (day === BIRTHDAY_DAY && month === BIRTHDAY_MONTH);
 
-    // 🎉 BIRTHDAY UNLOCK SEQUENCE
+    // 🎉 BIRTHDAY MODE
     if (isBirthday) {
 
-        status.innerHTML = "<div class='loading'>Verifying credentials...</div>";
-        await delay(800);
+        status.innerHTML = "<div class='loading'>Verifying identity...</div>";
+        await delay(900);
 
-        status.innerHTML = "<div class='loading'>Decrypting secure archive...</div>";
+        status.innerHTML = "<div class='loading'>Decrypting secure file...</div>";
         await delay(1000);
 
-        status.innerHTML = "<div class='loading'>Establishing secure channel...</div>";
+        status.innerHTML = "<div class='loading'>Access granted pending final check...</div>";
         await delay(1000);
 
         launchConfetti();
@@ -62,15 +62,16 @@ async function checkDate() {
         status.innerHTML = `
             <div class="birthday-message">
                 🔓 ACCESS GRANTED<br><br>
-                🎉 CLASSIFIED MESSAGE UNLOCKED:<br><br>
-                ${decodeMessage()}
+                🎉 HAPPY BIRTHDAY LINDO.<br>
+                YOUR MISSION TODAY IS TO HAVE A BLAST.<br>
+                GODSPEED!
             </div>
         `;
 
         return;
     }
 
-    // ⏳ COUNTDOWN SYSTEM
+    // ⏳ COUNTDOWN MODE
     const year = selectedDate.getFullYear();
 
     let nextBirthday = new Date(year, BIRTHDAY_MONTH, BIRTHDAY_DAY);
@@ -85,7 +86,7 @@ async function checkDate() {
 
     status.innerHTML =
         `ACCESS DENIED<br><br>
-        Next authorized activation in:<br>
+        Next mission activation in:<br>
         <b>${daysRemaining}</b> day(s)`;
 }
 
@@ -99,14 +100,12 @@ function launchConfetti() {
     const end = Date.now() + duration;
 
     (function frame() {
-
         confetti({ particleCount: 5, spread: 90, origin: { x: 0 } });
         confetti({ particleCount: 5, spread: 90, origin: { x: 1 } });
 
         if (Date.now() < end) {
             requestAnimationFrame(frame);
         }
-
     })();
 }
 
@@ -127,8 +126,6 @@ function createBalloons() {
 
         container.appendChild(balloon);
 
-        setTimeout(() => {
-            balloon.remove();
-        }, 16000);
+        setTimeout(() => balloon.remove(), 16000);
     }
 }
