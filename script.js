@@ -72,7 +72,7 @@ async function checkDate() {
         const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
         status.innerHTML =
-            "Hang in there. There are " + daysRemaining + " day(s) until the next birthday.";
+            "Hang in there. There are " + daysRemaining + " day(s) until your next birthday.";
     }
 }
 
