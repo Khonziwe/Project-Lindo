@@ -2,172 +2,135 @@ const encodedMessage =
 "SGFwcHkgYmlydGhkYXkgTGluZG8uIEkgaG9wZSB5b3UgYXJlIGhhdmluZyBhIGJsYXN0IG9mIGEgZGF5LiBHb2QgYmxlc3Mu";
 
 function decodeMessage() {
-return atob(encodedMessage);
+    return atob(encodedMessage);
 }
 
 async function checkDate() {
 
-```
-const input = document.getElementById("dateInput").value;
-const status = document.getElementById("status");
-const card = document.getElementById("mainCard");
-const music = document.getElementById("birthdayMusic");
+    const input = document.getElementById("dateInput").value;
+    const status = document.getElementById("status");
+    const card = document.getElementById("mainCard");
+    const music = document.getElementById("birthdayMusic");
 
-if (!input) {
-    status.innerHTML = "Please select a date.";
-    return;
-}
-
-const selectedDate = new Date(input);
-
-const day = selectedDate.getDate();
-const month = selectedDate.getMonth();
-
-const birthdayDay = 9;
-const birthdayMonth = 5; // June
-
-if(day === birthdayDay && month === birthdayMonth){
-
-    status.innerHTML =
-    "<div class='loading'>Date Verified...</div>";
-
-    await delay(1200);
-
-    status.innerHTML =
-    "<div class='loading'>Loading Project Lindo...</div>";
-
-    await delay(1200);
-
-    status.innerHTML =
-    "<div class='loading'>Preparing Message...</div>";
-
-    await delay(1500);
-
-    launchConfetti();
-    createBalloons();
-
-    card.classList.add("celebration");
-
-    music.currentTime = 0;
-
-    try{
-        await music.play();
-    }
-    catch(error){
-        console.log(error);
+    if (!input) {
+        status.innerHTML = "Please select a date.";
+        return;
     }
 
-    status.innerHTML =
-    "🎉<br><br>" +
-    decodeMessage();
+    const selectedDate = new Date(input);
 
-}else{
+    const day = selectedDate.getDate();
+    const month = selectedDate.getMonth();
 
-    music.pause();
-    music.currentTime = 0;
+    const birthdayDay = 9;
+    const birthdayMonth = 5; // June (0-indexed)
 
-    const currentYearBirthday =
-    new Date(
-        selectedDate.getFullYear(),
-        birthdayMonth,
-        birthdayDay
-    );
+    if (day === birthdayDay && month === birthdayMonth) {
 
-    let nextBirthday = currentYearBirthday;
+        status.innerHTML = "<div class='loading'>Date Verified...</div>";
+        await delay(1200);
 
-    if(selectedDate > currentYearBirthday){
-        nextBirthday =
-        new Date(
-            selectedDate.getFullYear()+1,
-            birthdayMonth,
-            birthdayDay
-        );
+        status.innerHTML = "<div class='loading'>Loading Project Lindo...</div>";
+        await delay(1200);
+
+        status.innerHTML = "<div class='loading'>Preparing Message...</div>";
+        await delay(1500);
+
+        launchConfetti();
+        createBalloons();
+
+        card.classList.add("celebration");
+
+        music.currentTime = 0;
+
+        try {
+            await music.play();
+        } catch (error) {
+            console.log("Audio play blocked:", error);
+        }
+
+        status.innerHTML =
+            "🎉<br><br>" + decodeMessage();
+
+    } else {
+
+        music.pause();
+        music.currentTime = 0;
+
+        const currentYearBirthday =
+            new Date(selectedDate.getFullYear(), birthdayMonth, birthdayDay);
+
+        let nextBirthday = currentYearBirthday;
+
+        if (selectedDate > currentYearBirthday) {
+            nextBirthday =
+                new Date(selectedDate.getFullYear() + 1, birthdayMonth, birthdayDay);
+        }
+
+        const diff = nextBirthday - selectedDate;
+
+        const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        status.innerHTML =
+            "Hang in there. There are " + daysRemaining + " day(s) until the next birthday.";
     }
-
-    const diff =
-    nextBirthday - selectedDate;
-
-    const daysRemaining =
-    Math.ceil(
-        diff/(1000*60*60*24)
-    );
-
-    status.innerHTML =
-    `Hang in there. There are ${daysRemaining} day(s) until the next birthday.`;
-}
-```
-
 }
 
-function delay(ms){
-return new Promise(resolve => setTimeout(resolve, ms));
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function launchConfetti(){
+function launchConfetti() {
 
-```
-const duration = 6000;
-const end = Date.now() + duration;
+    const duration = 6000;
+    const end = Date.now() + duration;
 
-(function frame() {
+    (function frame() {
 
-    confetti({
-        particleCount:5,
-        spread:90,
-        origin:{x:0}
-    });
+        confetti({
+            particleCount: 5,
+            spread: 90,
+            origin: { x: 0 }
+        });
 
-    confetti({
-        particleCount:5,
-        spread:90,
-        origin:{x:1}
-    });
+        confetti({
+            particleCount: 5,
+            spread: 90,
+            origin: { x: 1 }
+        });
 
-    if(Date.now() < end){
-        requestAnimationFrame(frame);
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+
+    })();
+}
+
+function createBalloons() {
+
+    const container = document.getElementById("balloon-container");
+
+    const colors = [
+        "#ff4d6d",
+        "#ffd60a",
+        "#4cc9f0",
+        "#80ed99",
+        "#c77dff"
+    ];
+
+    for (let i = 0; i < 25; i++) {
+
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+
+        balloon.style.left = Math.random() * 100 + "%";
+        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.animationDuration = (8 + Math.random() * 8) + "s";
+
+        container.appendChild(balloon);
+
+        setTimeout(() => {
+            balloon.remove();
+        }, 16000);
     }
-
-})();
-```
-
-}
-
-function createBalloons(){
-
-```
-const container =
-document.getElementById("balloon-container");
-
-const colors = [
-    "#ff4d6d",
-    "#ffd60a",
-    "#4cc9f0",
-    "#80ed99",
-    "#c77dff"
-];
-
-for(let i=0;i<25;i++){
-
-    const balloon =
-    document.createElement("div");
-
-    balloon.classList.add("balloon");
-
-    balloon.style.left =
-    Math.random()*100 + "%";
-
-    balloon.style.background =
-    colors[Math.floor(Math.random()*colors.length)];
-
-    balloon.style.animationDuration =
-    (8 + Math.random()*8) + "s";
-
-    container.appendChild(balloon);
-
-    setTimeout(()=>{
-        balloon.remove();
-    },16000);
-}
-```
-
 }
