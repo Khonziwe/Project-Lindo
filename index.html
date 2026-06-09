@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Confetti Library -->
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 
@@ -19,13 +19,13 @@
 
     <h1>PROJECT LINDO</h1>
 
-    <!-- 🔒 MISSION BRIEFING -->
+    <!-- ONLY YOUR REQUIRED MESSAGE -->
     <div class="briefing">
-        <p class="classified">🔒 TOP SECRET TRANSMISSION</p>
-
-        <p>Access Level: Confidential</p>
-        <p>Recipient: Lindo</p>
-        <p>Authorization Required</p>
+        <p>
+            Access Level: Confidential<br>
+            Recipient: Lindo<br>
+            Authorization Required
+        </p>
 
         <br>
 
@@ -39,18 +39,10 @@
         <p>
             To verify identity and unlock this file, you must correctly enter the date on which this transmission is being accessed.
         </p>
-
-        <br>
-
-        <p>
-            Failure to match the access date will result in immediate lockdown of the message system.
-        </p>
     </div>
 
-    <div class="input-group">
-        <label for="dateInput">Enter Access Date</label>
-        <input type="date" id="dateInput">
-    </div>
+    <label for="dateInput">Enter Access Date</label>
+    <input type="date" id="dateInput">
 
     <button onclick="checkDate()">Authenticate</button>
 
