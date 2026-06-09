@@ -13,7 +13,7 @@ async function checkDate() {
     const music = document.getElementById("birthdayMusic");
     const balloonContainer = document.getElementById("balloon-container");
 
-    // RESET UI EVERY TIME (fixes your "first try bug")
+    // RESET EVERYTHING EVERY TIME (fixes first-try bug)
     card.classList.remove("celebration");
     balloonContainer.innerHTML = "";
     music.pause();
@@ -26,7 +26,7 @@ async function checkDate() {
 
     const selectedDate = new Date(input);
 
-    // 🚨 BLOCK PAST DATES (before today)
+    // BLOCK PAST DATES (before today)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
@@ -40,7 +40,7 @@ async function checkDate() {
     const month = selectedDate.getMonth();
 
     const birthdayDay = 9;
-    const birthdayMonth = 5; // June (0-indexed)
+    const birthdayMonth = 5; // June
 
     const isBirthday = (day === birthdayDay && month === birthdayMonth);
 
@@ -66,7 +66,11 @@ async function checkDate() {
             console.log("Audio blocked:", e);
         }
 
-        status.innerHTML = "🎉<br><br>" + decodeMessage();
+        status.innerHTML =
+            `<div class="birthday-message">
+                🎉<br><br>
+                ${decodeMessage()}
+            </div>`;
 
     } else {
 
