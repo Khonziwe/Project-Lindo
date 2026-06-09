@@ -5,6 +5,10 @@ function decodeMessage() {
     return atob(encodedMessage);
 }
 
+// Birthday config (Lindo's birthday)
+const BIRTHDAY_DAY = 9;
+const BIRTHDAY_MONTH = 5; // June (0-indexed)
+
 async function checkDate() {
 
     const input = document.getElementById("dateInput").value;
@@ -13,47 +17,36 @@ async function checkDate() {
     const music = document.getElementById("birthdayMusic");
     const balloonContainer = document.getElementById("balloon-container");
 
-    // RESET EVERYTHING EVERY TIME (fixes first-try bug)
+    // RESET SYSTEM STATE
     card.classList.remove("celebration");
     balloonContainer.innerHTML = "";
     music.pause();
     music.currentTime = 0;
 
     if (!input) {
-        status.innerHTML = "Please select a date.";
+        status.innerHTML = "SYSTEM ERROR: No input detected.";
         return;
     }
 
     const selectedDate = new Date(input);
-
-    // BLOCK PAST DATES (before today)
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
-
-    if (selectedDate < today) {
-        status.innerHTML = "You cannot enter a past date.";
-        return;
-    }
 
     const day = selectedDate.getDate();
     const month = selectedDate.getMonth();
 
-    const birthdayDay = 9;
-    const birthdayMonth = 5; // June
+    const isBirthday = (day === BIRTHDAY_DAY && month === BIRTHDAY_MONTH);
 
-    const isBirthday = (day === birthdayDay && month === birthdayMonth);
-
+    // 🎉 BIRTHDAY UNLOCK SEQUENCE
     if (isBirthday) {
 
-        status.innerHTML = "<div class='loading'>Date Verified...</div>";
+        status.innerHTML = "<div class='loading'>Verifying credentials...</div>";
         await delay(800);
 
-        status.innerHTML = "<div class='loading'>Loading Project Lindo...</div>";
-        await delay(800);
+        status.innerHTML = "<div class='loading'>Decrypting secure archive...</div>";
+        await delay(1000);
 
-        status.innerHTML = "<div class='loading'>Preparing Message...</div>";
-        await delay(1200);
+        status.innerHTML = "<div class='loading'>Establishing secure channel...</div>";
+        await delay(1000);
 
         launchConfetti();
         createBalloons();
@@ -66,32 +59,34 @@ async function checkDate() {
             console.log("Audio blocked:", e);
         }
 
-        status.innerHTML =
-            `<div class="birthday-message">
-                🎉<br><br>
+        status.innerHTML = `
+            <div class="birthday-message">
+                🔓 ACCESS GRANTED<br><br>
+                🎉 CLASSIFIED MESSAGE UNLOCKED:<br><br>
                 ${decodeMessage()}
-            </div>`;
+            </div>
+        `;
 
-    } else {
-
-        const currentYearBirthday =
-            new Date(selectedDate.getFullYear(), birthdayMonth, birthdayDay);
-
-        let nextBirthday = currentYearBirthday;
-
-        if (selectedDate > currentYearBirthday) {
-            nextBirthday =
-                new Date(selectedDate.getFullYear() + 1, birthdayMonth, birthdayDay);
-        }
-
-        const diff = nextBirthday - selectedDate;
-        const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-        status.innerHTML =
-            "Hang in there. There are " +
-            daysRemaining +
-            " day(s until the next birthday.";
+        return;
     }
+
+    // ⏳ COUNTDOWN SYSTEM
+    const year = selectedDate.getFullYear();
+
+    let nextBirthday = new Date(year, BIRTHDAY_MONTH, BIRTHDAY_DAY);
+    nextBirthday.setHours(0, 0, 0, 0);
+
+    if (selectedDate > nextBirthday) {
+        nextBirthday = new Date(year + 1, BIRTHDAY_MONTH, BIRTHDAY_DAY);
+    }
+
+    const diff = nextBirthday - selectedDate;
+    const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    status.innerHTML =
+        `ACCESS DENIED<br><br>
+        Next authorized activation in:<br>
+        <b>${daysRemaining}</b> day(s)`;
 }
 
 function delay(ms) {
