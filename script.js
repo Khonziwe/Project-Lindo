@@ -95,7 +95,9 @@ if(day === birthdayDay && month === birthdayMonth){
     status.innerHTML =
     `Hang in there. There are ${daysRemaining} day(s) until the next birthday.`;
 }
+```
 
+}
 
 function delay(ms){
 return new Promise(resolve => setTimeout(resolve, ms));
